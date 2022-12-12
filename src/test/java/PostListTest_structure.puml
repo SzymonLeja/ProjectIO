@@ -1,0 +1,156 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "PostListTest",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_2493632 { 
+   	label=Post
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Post297341995[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Post</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   postCategory: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   postContact: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   postDescription: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   postId: Integer [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   postTitle: String [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PostList297341995[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PostList</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   postHashMap: HashMap&lt;Integer, Post&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addPost(postTitle: String, postDescription: String, postContact: String, postCategory: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deletePost(postId: Integer)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ editPost(postId: Integer, postTitle: String, postDescription: String, postContact: String, postCategory: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ findPost(postId: Integer): Post</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_918330160 { 
+   	label=PostListTest
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   PostListTest918330160[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PostListTest</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># addNewPostAndFindItProperly()</TD></TR>
+<TR><TD ALIGN="LEFT" ># addNewPostEditAndFindItProperly()</TD></TR>
+<TR><TD ALIGN="LEFT" ># addTwoPostsDeleteFirstAndFindSecondProperly()</TD></TR>
+<TR><TD ALIGN="LEFT" ># createNewEmptyPostList()</TD></TR>
+<TR><TD ALIGN="LEFT" ># getHashMapProperly()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+PostList297341995 -> Post297341995[label="postHashMap
+[0..*]"];
+PostList297341995 -> PostListTest918330160[arrowhead=none, arrowtail=empty, dir=both];
+PostListTest918330160 -> PostList297341995[arrowhead=none];
+    
+}
+@enduml
