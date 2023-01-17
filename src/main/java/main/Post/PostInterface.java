@@ -6,4 +6,5 @@ public interface PostInterface {
     public void addPost(String postTitle, String postDescription, String postContact, String postCategory);
     public void deletePost(Integer postId);
     public void createPostList();
+    public PostList getPostList();
 }

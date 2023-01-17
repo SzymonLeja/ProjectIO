@@ -35,19 +35,19 @@ public class Post {
         this.postId = postId;
     }
 
-    protected void setPostTitle(String postTitle) {
+    public void setPostTitle(String postTitle) {
         this.postTitle = postTitle;
     }
 
-    protected void setPostDescription(String postDescription) {
+    public void setPostDescription(String postDescription) {
         this.postDescription = postDescription;
     }
 
-    protected void setPostContact(String postContact) {
+    public void setPostContact(String postContact) {
         this.postContact = postContact;
     }
 
-    protected void setPostCategory(String postCategory) {
+    public void setPostCategory(String postCategory) {
         this.postCategory = postCategory;
     }
 }

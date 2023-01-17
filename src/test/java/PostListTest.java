@@ -6,16 +6,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PostListTest extends PostList {
-
     @Test
     void createNewEmptyPostList() {
-        PostList postList = PostInterface.createPostList();
-        assertEquals(0, postList.getPostHashMap().size());
+        PostInterface postList = new PostList();
+        assertEquals(0, postList.getPostList().getPostHashMap().size());
     }
 
     @Test
     void addNewPostAndFindItProperly(){
-        PostList postList = PostInterface.createPostList();
+        PostInterface postList = new PostList();
         String postTitle = "Very cool, strange and complicated title!";
         String postDescription = "This is very cool description, I'm using it to test my post list class!";
         String postContact = "Phone = +48600700800";
@@ -26,8 +25,23 @@ class PostListTest extends PostList {
     }
 
     @Test
+    void addNewPostAndEditItProperlyWithNullValues(){
+        PostInterface postList = new PostList();
+        String postTitle = "Very cool, strange and complicated title!";
+        String postDescription = "This is very cool description, I'm using it to test my post list class!";
+        String postContact = "Phone = +48600700800";
+        String postCategory = "Information";
+        postList.addPost(postTitle, postDescription, postContact, postCategory);
+        postList.editPost(0, null, null, null, null);
+        Post postFromList = postList.findPost(0);
+        assertEquals(postTitle,postFromList.getPostTitle());
+        assertEquals(postDescription,postFromList.getPostDescription());
+        assertEquals(postContact,postFromList.getPostContact());
+        assertEquals(postCategory,postFromList.getPostCategory());
+    }
+    @Test
     void addNewPostEditAndFindItProperly(){
-        PostList postList = PostInterface.createPostList();
+        PostInterface postList = new PostList();
         String postTitle = "Very cool, strange and complicated title!";
         String postDescription = "This is very cool description, I'm using it to test my post list class!";
         String postDescriptionEdited = "This is very cool description, I'm using it to test my post list class! And this is edited version of it!";
@@ -38,9 +52,23 @@ class PostListTest extends PostList {
         Post postFromList = postList.findPost(0);
         assertNotEquals(postDescription,postFromList.getPostDescription());
     }
+
+    @Test
+    void addNewPostAndDeleteItProperly(){
+        PostInterface postList = new PostList();
+        String postTitle = "Very cool, strange and complicated title!";
+        String postDescription = "This is very cool description, I'm using it to test my post list class!";
+        String postContact = "Phone = +48600700800";
+        String postCategory = "Information";
+        postList.addPost(postTitle, postDescription, postContact, postCategory);
+        int postListSizeBeforeDelete = postList.getPostList().getPostHashMap().size();
+        postList.deletePost(0);
+        int postListSizeAfterDelete = postList.getPostList().getPostHashMap().size();
+        assertEquals(postListSizeBeforeDelete, postListSizeAfterDelete+1);
+    }
     @Test
     void addTwoPostsDeleteFirstAndFindSecondProperly(){
-        PostList postList = PostInterface.createPostList();
+        PostInterface postList = new PostList();
         String postTitle = "Very cool, strange and complicated title!";
         String secondPostTitle = "Very cool, strange and complicated title! But its second one!";
 
@@ -58,12 +86,12 @@ class PostListTest extends PostList {
 
     @Test
     void getHashMapProperly(){
-        PostList postList = PostInterface.createPostList();
+        PostInterface postList = new PostList();
         String postTitle = "Very cool, strange and complicated title!";
         String postDescription = "This is very cool description, I'm using it to test my post list class!";
         String postContact = "Phone = +48600700800";
         String postCategory = "Information";
         postList.addPost(postTitle, postDescription, postContact, postCategory);
-        assertEquals(1,postList.getPostHashMap().size());
+        assertEquals(1,postList.getPostList().getPostHashMap().size());
     }
 }

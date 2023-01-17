@@ -58,4 +58,9 @@ public class PostList implements PostInterface {
     public void createPostList() {
         new PostList();
     }
+
+    @Override
+    public PostList getPostList() {
+        return this;
+    }
 }

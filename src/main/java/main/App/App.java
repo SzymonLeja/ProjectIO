@@ -68,53 +68,35 @@ public class App {
     }
     public static void editPostMenu(Scanner scanner){
         System.out.println("Please choose an option:");
-        System.out.println("1. Edit title");
-        System.out.println("2. Edit description");
-        System.out.println("3. Edit contact");
-        System.out.println("4. Edit category");
-        System.out.println("5. Delete post");
-        System.out.println("6. Exit");
+        System.out.println("1. Edit post");
+        System.out.println("2. Delete post");
+        System.out.println("0. Exit");
         String answer = scanner.nextLine();
         if(answer.equals("1")){
             System.out.println("Please give the id of the post you want to edit");
             Integer postId = scanner.nextInt();
-            System.out.println("Please give the new title of the post");
-            String postTitle = scanner.nextLine();
-           postList.editPost(postId, postTitle, null, null, null);
-            editPostMenu(scanner);
+            if(postList.findPost(postId) != null){
+                System.out.println("Please give the new title of the post");
+                String postTitle = scanner.nextLine();
+                System.out.println("Please give the new description of the post");
+                String postDescription = scanner.nextLine();
+                System.out.println("Please give the new contact of the post");
+                String postContact = scanner.nextLine();
+                System.out.println("Please give the new category of the post");
+                String postCategory = scanner.nextLine();
+                postList.editPost(postId, postTitle, postDescription, postContact, postCategory);
+            } else {
+                System.out.println("There is no post with this id!");
+            }
+            return;
         }
         if(answer.equals("2")){
-            System.out.println("Please give the id of the post you want to edit");
-            Integer postId = scanner.nextInt();
-            System.out.println("Please give the new description of the post");
-            String postDescription = scanner.nextLine();
-            postList.editPost(postId, null, postDescription, null, null);
-            editPostMenu(scanner);
-
-        }
-        if(answer.equals("3")){
-            System.out.println("Please give the id of the post you want to edit");
-            Integer postId = scanner.nextInt();
-            System.out.println("Please give the new contact of the post");
-            String postContact = scanner.nextLine();
-           postList.editPost(postId, null, null, postContact, null);
-            editPostMenu(scanner);
-        }
-        if(answer.equals("4")){
-            System.out.println("Please give the id of the post you want to edit");
-            Integer postId = scanner.nextInt();
-            System.out.println("Please give the new category of the post");
-            String postCategory = scanner.nextLine();
-           postList.editPost(postId, null, null, null, postCategory);
-            editPostMenu(scanner);
-        }
-        if(answer.equals("5")){
             System.out.println("Please give the id of the post you want to delete");
             Integer postId = scanner.nextInt();
            postList.deletePost(postId);
             editPostMenu(scanner);
         }
-        if(answer.equals("6")){
+        if(answer.equals("0")){
             moderatorMenu(scanner);
         }
     }
