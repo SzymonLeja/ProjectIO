@@ -1,19 +1,24 @@
 import jdk.jfr.Category;
 import main.Post.Post;
 import org.junit.jupiter.api.Test;
+import mockit.Mocked;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Category("Post")
-public class PostTest {
+@Category("MockedPost")
+public class PostMockTest {
+
+    @Mocked
+    Post postMocked = new Post("Very cool, strange and complicated title!", "This is very cool description, I'm using it to test my post list class!", "Phone = +48600700800", "Information", 0);
+
+
     @Test
     void createNewPost() {
-        Post post = new Post("Very cool, strange and complicated title!", "This is very cool description, I'm using it to test my post list class!", "Phone = +48600700800", "Information", 0);
-        assertEquals("Very cool, strange and complicated title!", post.getPostTitle());
-        assertEquals("This is very cool description, I'm using it to test my post list class!", post.getPostDescription());
-        assertEquals("Phone = +48600700800", post.getPostContact());
-        assertEquals("Information", post.getPostCategory());
-        assertEquals(0, post.getPostId());
+        assertEquals("Very cool, strange and complicated title!", postMocked.getPostTitle());
+        assertEquals("This is very cool description, I'm using it to test my post list class!", postMocked.getPostDescription());
+        assertEquals("Phone = +48600700800", postMocked.getPostContact());
+        assertEquals("Information", postMocked.getPostCategory());
+        assertEquals(0, postMocked.getPostId());
     }
 
     @Test
@@ -38,15 +43,14 @@ public class PostTest {
 
     @Test
     void createNewPostAndSetNewValues() {
-        Post post = new Post("Very cool, strange and complicated title!", "This is very cool description, I'm using it to test my post list class!", "Phone = +48600700800", "Information", 0);
-        post.setPostTitle("Very cool, strange and complicated title! And this is edited version of it!");
-        post.setPostDescription("This is very cool description, I'm using it to test my post list class! And this is edited version of it!");
-        post.setPostContact("Phone = +48600700800 And this is edited version of it!");
-        post.setPostCategory("Information And this is edited version of it!");
-        assertEquals("Very cool, strange and complicated title! And this is edited version of it!", post.getPostTitle());
-        assertEquals("This is very cool description, I'm using it to test my post list class! And this is edited version of it!", post.getPostDescription());
-        assertEquals("Phone = +48600700800 And this is edited version of it!", post.getPostContact());
-        assertEquals("Information And this is edited version of it!", post.getPostCategory());
+        postMocked.setPostTitle("Very cool, strange and complicated title! And this is edited version of it!");
+        postMocked.setPostDescription("This is very cool description, I'm using it to test my postMocked list class! And this is edited version of it!");
+        postMocked.setPostContact("Phone = +48600700800 And this is edited version of it!");
+        postMocked.setPostCategory("Information And this is edited version of it!");
+        assertEquals("Very cool, strange and complicated title! And this is edited version of it!", postMocked.getPostTitle());
+        assertEquals("This is very cool description, I'm using it to test my postMocked list class! And this is edited version of it!", postMocked.getPostDescription());
+        assertEquals("Phone = +48600700800 And this is edited version of it!", postMocked.getPostContact());
+        assertEquals("Information And this is edited version of it!", postMocked.getPostCategory());
     }
 
     @Test
